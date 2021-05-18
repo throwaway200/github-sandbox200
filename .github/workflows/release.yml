@@ -22,9 +22,9 @@ jobs:
         echo github.event_name ${{ github.event_name }} ;
         echo github.author_association ${{ github.author_association }} ;
         echo github.event.author_association ${{ github.event.author_association }} ;
+        echo github.event.pull_request.author_association ${{ github.event.pull_request.author_association }} ;
       if: |
-        ${{ success()
-          && github.repository_owner == 'throwaway200'
+        ${{ github.repository_owner == 'throwaway200'
           && ( github.event_name == 'push'
                || github.author_association == 'OWNER'
                || github.author_association == 'MEMBER'
