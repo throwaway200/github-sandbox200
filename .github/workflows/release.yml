@@ -13,8 +13,13 @@ jobs:
       with:
         script: console.log(context); return "Hello!";
         result-encoding: string
-    - name: Test
-      run: echo "Hello, world!"
+  work:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Do Work
+      run: |
+        echo github.author_association ${{ github.author_association }} ;
+        echo github.event.author_association ${{ github.event.author_association }} ;
       if: |
         ${{ success()
           && github.repository_owner == 'throwaway200'
