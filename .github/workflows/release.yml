@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Do Work
-      if: |
+      if: >
         ${{ github.repository_owner == 'throwaway200'
           && ( github.event_name == 'push'
                || github.event.pull_request.author_association == 'OWNER_JUNK2'
