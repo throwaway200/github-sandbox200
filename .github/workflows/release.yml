@@ -7,8 +7,19 @@ jobs:
   test-output:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/github-script@v4
+    - name: Context
+      uses: actions/github-script@v4
       id: set-result
       with:
         script: console.log(context); return "Hello!";
         result-encoding: string
+    - name: Test
+      run: echo "Hello, world!"
+      if: |
+        ${{ success()
+          && github.repository_owner == 'throwaway200'
+          && ( github.event_name == 'push'
+               || github.author_association == 'OWNER'
+               || github.author_association == 'MEMBER'
+               || github.author_association == 'COLLABORATOR' ) }}
+
