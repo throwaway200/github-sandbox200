@@ -4,29 +4,18 @@ on:
   push:
 
 jobs:
-  test-output:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Context
-      uses: actions/github-script@v4
-      id: set-result
-      with:
-        script: console.log(context); return "Hello!";
-        result-encoding: string
   work:
     runs-on: ubuntu-latest
     steps:
     - name: Do Work
-      run: |
-        echo github.repository_owner ${{ github.repository_owner }} ;
-        echo github.event_name ${{ github.event_name }} ;
-        echo github.author_association ${{ github.author_association }} ;
-        echo github.event.author_association ${{ github.event.author_association }} ;
-        echo github.event.pull_request.author_association ${{ github.event.pull_request.author_association }} ;
       if: |
         ${{ github.repository_owner == 'throwaway200'
           && ( github.event_name == 'push'
-               || github.author_association == 'OWNER'
-               || github.author_association == 'MEMBER'
-               || github.author_association == 'COLLABORATOR' ) }}
-
+               || github.event.pull_request.author_association == 'OWNER'
+               || github.event.pull_request.author_association == 'MEMBER'
+               || github.event.pull_request.author_association == 'COLLABORATOR' ) }}
+      run: |
+        echo github.repository_owner ${{ github.repository_owner }} ;
+        echo github.event_name ${{ github.event_name }} ;
+        echo github.event.pull_request.author_association ${{ github.event.pull_request.author_association }} ;
+        echo event ${{ toJSON(github.event) }} ;
