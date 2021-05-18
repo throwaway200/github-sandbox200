@@ -11,7 +11,7 @@ jobs:
       if: |
         ${{ github.repository_owner == 'throwaway200'
           && ( github.event_name == 'push'
-               || github.event.pull_request.author_association == 'OWNER_JUNK'
+               || github.event.pull_request.author_association == 'OWNER_JUNK2'
                || github.event.pull_request.author_association == 'MEMBER'
                || github.event.pull_request.author_association == 'COLLABORATOR' ) }}
       run: |
